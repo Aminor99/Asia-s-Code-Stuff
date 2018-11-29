@@ -2,10 +2,12 @@
 //make attacks randomly generated DONE
 //make enemy attacks randomly generated
 //use loop  to go through the potions KINDA DONE?
-//implement exp system later, it will increase your attack and your hp or something
-//might make the users fighter an object,,, i should right? would that make things easier?
+//implement exp system later, it will increase your attack and your hp or something DONE
+//might make the users fighter an object,,, i should right? would that make things easier? DONE SOMEWHERE ELSE,,,
 //This code is a mess,,,, i need to clean this up somehow??? I REALLY GOTTA CLEAN THIS MESS UP
 //All the system.out.println's are to keep a log og all the actions going on
+
+//i realize this is very extravagant for a HP "Test" huh
 
 import javax.swing.JOptionPane;
 import java.util.Random;
@@ -15,15 +17,18 @@ public class HealthPointTest {
 	public static int userHP, userEXP, userLVL;
 	private static String fullName, inputName;
 	
-	//so i can get the variable userHP and change it whenever called, i never used a setter before? ope this works
+	//so i can get the variable userHP and change it whenever called, i never used a setter before? hope this works
 		//static public int setUserHP(int UserHP) {
 			//return userHP;
 		//}
 		static public int getUserExp() {
 			return userEXP;
 		}
-		static public int setUserEXP(int UserEXP) {
-			return userEXP;
+		static public void setUserEXP(int UserEXP) {
+			userEXP = UserEXP;
+		}
+		static public int getUserHP() {
+			return userHP;
 		}
 
 //THIS IS THE M A I N M E T H O D
@@ -86,24 +91,42 @@ public class HealthPointTest {
 	}
 //levels up the user	
 	public static void levelUP() {
-		if(userEXP <= 10) {
+		if(userEXP <= 10) { //lvl 2
 			getLevel();
-		} else if (userEXP <= 25) {
+			userHP = 800;
+			Enemy.setDamageDealt(10, 21);
+		} else if (userEXP <= 25) { //lvl 3
 			getLevel();
-		} else if (userEXP <= 50) {
+			userHP = 850;
+			Enemy.setDamageDealt(13, 24);
+		} else if (userEXP <= 50) { //lvl 4
 			getLevel();
-		} else if (userEXP <= 100) {
+			userHP = 950;
+			Enemy.setDamageDealt(16, 27);
+		} else if (userEXP <= 100) { //lvl 5
 			getLevel();
-		} else if (userEXP <= 150) {
+			userHP = 1000;
+			Enemy.setDamageDealt(19, 30);
+		} else if (userEXP <= 150) { //lvl 6
 			getLevel();
-		} else if (userEXP <= 200) {
+			userHP = 1050;
+			Enemy.setDamageDealt(22, 33);
+		} else if (userEXP <= 200) { //lvl 7
 			getLevel();
-		} else if (userEXP <= 250) {
+			userHP = 1100;
+			Enemy.setDamageDealt(25, 36);
+		} else if (userEXP <= 250) { //lvl 8
 			getLevel();
-		} else if (userEXP <= 300) {
+			userHP = 1150;
+			Enemy.setDamageDealt(28, 39);
+		} else if (userEXP <= 300) { //lvl 9
 			getLevel();
-		} else if (userEXP <= 350) {
+			userHP = 1200;
+			Enemy.setDamageDealt(31, 42);
+		} else if (userEXP <= 350) { //lvl 10
 			getLevel();
+			userHP = 1250;
+			Enemy.setDamageDealt(34, 45);
 		} 
 
 	}
@@ -116,16 +139,50 @@ public class HealthPointTest {
 
 class Enemy{
 	
+//all the random generators for damage being dealt	WHAT IS THE PROBEL >:L
+	private Random ranDamage = new Random();
+	private int damageDealt = ranDamage.nextInt(19) + 7;
+//now for the enemies/////////	 WHATS THE PROBLEM HERE
+	private Random ranGoblinDamage = new Random();
+	private int goblinDamage = ranGoblinDamage.nextInt(25) + 21;
+	private Random ranGoombaDamage = new Random();
+	private int goombaDamage = ranGoombaDamage.nextInt(29) + 25;
+	private Random ranSaber_Tooth_TigerDamage = new Random();
+	private int saber_tooth_tigerDamage = ranSaber_Tooth_TigerDamage.nextInt(47) + 43;
+	private Random ranDragonDamage = new Random();
+	private int dragonDamage = ranDragonDamage.nextInt(177) + 173;
+	private Random ranSlimeDamage = new Random();
+	private int silmeDamage = ranSlimeDamage.nextInt(7) + 3;
+	private Random ranSkeletonDamage = new Random();
+	private int skeletonDamage = ranSkeletonDamage.nextInt(22) + 18;
+	private Random ranOgreDamage = new Random();
+	private int ogreDamage = ranOgreDamage.nextInt(127) + 123;
+	private Random ranWerewolfDamage = new Random();
+	private int werewolfDamage = ranWerewolfDamage.nextInt(102) + 98;
+	private Random ranZombieDamage = new Random();
+	private int zombieDamage = ranZombieDamage.nextInt(28) + 24;
+	private Random ranSirenDamage = new Random();
+	private int sirenDamage = ranSirenDamage.nextInt(45) + 41;
+	private Random ranYetiDamage = new Random();
+	private int yetiDamage = ranYetiDamage.nextInt(80) + 76;
+	private Random ranBearDamage = new Random();
+	private int bearDamage = ranBearDamage.nextInt(58) + 54;
+	private Random ranGiant_SpiderDamage = new Random();
+	private int giant_spiderDamage = ranGiant_SpiderDamage.nextInt(69) + 65;
+	private Random ranPuzzluxDamage = new Random();
+	private int puzzluxDamage = ranPuzzluxDamage.nextInt(68) + 64;
+	private Random ranLockjawDamage = new Random();
+	private int lockjawDamage = ranLockjawDamage.nextInt(157) + 153;
+	private Random ranRocknerDamage = new Random();
+	private int rocknerDamage = ranRocknerDamage.nextInt(182) + 178;
+	
+	private static Enemy chosenEnemy;
+	//private static int uexp = HealthPointTest.getUserExp();  //uexp means user exp // is this even used??
+	
 	private int HP; //I had problems when i made them static ? I think its because i was the attributes were being used elsewhere?
 	private String name;
 	private int attack;
 	private int exp;
-	
-	private static Enemy chosenEnemy;
-	private static int uexp = HealthPointTest.getUserExp();  //uexp means user exp 
-	
-	//static int ehp = Enemy.getUserHP();
-	//static int uhp = HealthPointTest.getUserHP(); //taking the userHP variable from the HealthPointTest class,,, i was trying something
 	
 	Enemy(int h, String n, int a, int e){
 		HP = h;
@@ -134,22 +191,22 @@ class Enemy{
 		exp = e;
 	}
 	//idk, im making some enemies with some attributes :O ,,,, i should move these somewhere else
-	static Enemy Goblin = new Enemy(20, "Goblin", 23, 5);
-	static Enemy Goomba = new Enemy(20, "Goomba", 27, 5);
-	static Enemy Saber_Tooth_Tiger = new Enemy(50, "Saber Tooth Tiger", 45, 15);
-	static Enemy Dragon = new Enemy(200, "Dragon", 175, 50);
-	static Enemy Slime = new Enemy(10, "Slime", 5, 2);
-	static Enemy Skeleton = new Enemy(15, "Skeleton", 20, 5);
-	static Enemy Ogre = new Enemy(150,"Ogre",125, 35);
-	static Enemy Werewolf = new Enemy(75, "Werewolf", 100, 20);
-	static Enemy Zombie = new Enemy (35, "Zombie", 26, 10);
-	static Enemy Siren = new Enemy(50, "Siren", 43, 20);
-	static Enemy Yeti = new Enemy(165,"Yeti", 78, 25);
-	static Enemy Bear = new Enemy(60,"Bear", 56, 20);
-	static Enemy Giant_Spider = new Enemy(65, "Giant Spider", 67, 20);
-	static Enemy Puzzlux = new Enemy(65,"Puzzlux", 66, 20);
-	static Enemy Lockjaw = new Enemy(110,"Lockjaw", 155, 35);
-	static Enemy Rockner = new Enemy(300, "Rockner", 180, 80);
+	static Enemy Goblin = new Enemy(20, "Goblin", goblinDamage, 5);
+	static Enemy Goomba = new Enemy(20, "Goomba", goombaDamage, 5);
+	static Enemy Saber_Tooth_Tiger = new Enemy(50, "Saber Tooth Tiger", saber_tooth_tigerDamage, 15);
+	static Enemy Dragon = new Enemy(200, "Dragon", dragonDamage, 50);
+	static Enemy Slime = new Enemy(10, "Slime", silmeDamage, 2);
+	static Enemy Skeleton = new Enemy(15, "Skeleton", skeletonDamage, 5);
+	static Enemy Ogre = new Enemy(150,"Ogre", ogreDamage, 35);
+	static Enemy Werewolf = new Enemy(75, "Werewolf", werewolfDamage, 20);
+	static Enemy Zombie = new Enemy (35, "Zombie", zombieDamage, 10);
+	static Enemy Siren = new Enemy(50, "Siren", sirenDamage, 20);
+	static Enemy Yeti = new Enemy(165,"Yeti", yetiDamage, 25);
+	static Enemy Bear = new Enemy(60,"Bear", bearDamage, 20);
+	static Enemy Giant_Spider = new Enemy(65, "Giant Spider", giant_spiderDamage, 20);
+	static Enemy Puzzlux = new Enemy(65,"Puzzlux", puzzluxDamage, 20);
+	static Enemy Lockjaw = new Enemy(110,"Lockjaw", lockjawDamage, 35);
+	static Enemy Rockner = new Enemy(300, "Rockner", rocknerDamage, 80);
 	
 	public static void randomEnemyGenerator() {
 		
@@ -185,8 +242,8 @@ class Enemy{
 //this method allows the user to deal a random amount of damage to the enemy
 	public static void userAttack(){
 		
-		Random ranDamage = new Random();
-		int damageDealt = ranDamage.nextInt(19) + 7; 
+		//Random ranDamage = new Random();
+		//damageDealt = ranDamage.nextInt(19) + 7; 
 		JOptionPane.showMessageDialog(null, "You dealt " + damageDealt + " damage!");
 		
 		chosenEnemy.HP = chosenEnemy.HP - damageDealt; System.out.println("The enemy now has " + chosenEnemy.HP + " hp.");
@@ -208,6 +265,10 @@ class Enemy{
 				System.exit(0);
 			}
 		}
+	}
+	//for changing attack after user levels up
+	public static void setDamageDealt(int min, int max) {
+		damageDealt = ranDamage.nextInt(max) + min;
 	}
 	///EXO THING NEEDS TO BE FIXED
 	public static int EXP(int xp) {
@@ -261,8 +322,13 @@ class Potions{
 		int rh = chosenPotion.healthRestored; //rh stands for restored health
 		hp = hp+rh;
 		
+		if(hp > HealthPointTest.getUserHP()) {
+			hp = HealthPointTest.getUserHP();
+		}
+		
 		JOptionPane.showMessageDialog(null, "You used a " + chosenPotion.potionName + ".\nYou know have " + hp + " hp!"); System.out.println("You gained " + chosenPotion.healthRestored);
 		
 		return hp;
 	}
+	
 }
